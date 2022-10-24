@@ -9,21 +9,21 @@ window.onload = () => {
 
 
     let btnTalk = document.getElementById('btnTalk');
-    btnTalk.onclick(() => {
+    btnTalk.onclick = () => {
         // TODO: transmit audio
-    })
+    }
 }
 
 const errorCallback = (e) => {
     window.alert('Error getting permissions');
 }
 
-const requestPermission = () => {
-    navigator.getUserMedia({
+const requestPermission = async () => {
+    let stream = await navigator.mediaDevices.getUserMedia({
         video: true,
         audio: true
-    }, (localMediaStream) => {
-        let video = document.querySelector('video');
-        video.srcObject = localMediaStream;
-    }, errorCallback);
+    });
+
+    let video = document.querySelector('video');
+    video.srcObject = stream;
 }
